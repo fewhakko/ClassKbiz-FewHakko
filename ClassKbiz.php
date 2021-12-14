@@ -74,8 +74,8 @@ class kbizbyfeweiei {
 	}
 
 	function getTransactionHistory($startDate = null, $endDate = null) {
-		$startDate = ($startDate == null) ? date("d/m/Y" ,strtotime('-1 day')) : $startDate;
-		$endDate = ($endDate == null) ? date("d/m/Y" , time()) : $endDate;
+		$startDate = ($startDate == null) ? date("d/m/Y", strtotime('-1 day')) : $startDate;
+		$endDate = ($endDate == null) ? date("d/m/Y", time()) : $endDate;
 		$headers = array(
 			"Connection: keep-alive",
 			"X-IB-ID: ".$this->response["ibId"],
