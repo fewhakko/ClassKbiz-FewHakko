@@ -41,7 +41,7 @@ class kbizbyfeweiei {
 		CURLOPT_FOLLOWLOCATION => true,
 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS => "userName=".$this->response["username"]."&password=".$this->response["password"]."&tokenId=13229096910&cmd=authenticate&locale=th&custType=&captcha=&app=0",
+		CURLOPT_POSTFIELDS => "userName=".$this->response["username"]."&password=".$this->response["password"]."&tokenId=1".rand(1000000000, 9999999999)."&cmd=authenticate&locale=th&custType=&captcha=&app=0",
 		CURLOPT_HTTPHEADER => array(
 			'Content-Type: application/x-www-form-urlencoded',
 		),
