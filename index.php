@@ -11,8 +11,7 @@
 
     //Step1
     // $dataRsso = $kbank->login();
-    // $result = $kbank->validateSession($dataRsso); 
-    // เอา Token กับ เอา ibId
+    // $result = $kbank->validateSession($dataRsso); // เอา Token กับ เอา ibId
     // print_r($result);
 
     // Step2
