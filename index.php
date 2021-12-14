@@ -17,8 +17,8 @@
 
     // Step2
     // $res = $kbank->refreshSession();
-    // $res = $kbank->getTransactionHistory("15/12/2020");
-    // $res = $kbank->getAccountSummaryList();
+    // $res = $kbank->getTransactionHistory(); //โชว์ประวัติการทำรายการต่างๆบลาๆ
+    // $res = $kbank->getAccountSummaryList(); //โชว์ข้อมูลผู้ใช้ เช่น เลขบัญชี หรือ จำนวนเงินในบัญชี
     // print_r($res);
 
 ?>
