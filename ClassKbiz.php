@@ -59,7 +59,7 @@ class kbizbyfeweiei {
 		$token = explode("X-SESSION-TOKEN", $response)[1];
 		$token = explode("\n", $token);
 		$token = trim(explode(":", $token[0])[1]);
-		return array('data' => json_decode(explode("\n", $response)[19]), true, "token" => $token);
+		return array('ibId' => explode('"', explode('{"ibId":"', $response)[1])[0], "token" => $token);
 	}
 
 	function refreshSession() {
