@@ -19,8 +19,8 @@ $kbank = new kbizbyfeweiei(array(
 ```PHP
 // Step2
 $dataRsso = $kbank->login();
-$result = $kbank->validateSession($dataRsso); // เอา Token กับ เอา ibId เอาไปใส่ในโค้ดที่อยู่ขั้นตอนแรก
-print_r($result);
+$result = $kbank->validateSession($dataRsso); 
+print_r($result); // เอา Token กับ เอา ibId เอาไปใส่ในโค้ดที่อยู่ขั้นตอนแรก
 ```
 
 ## ขั้นตอนที่สามให้ทำการ แสดงผลข้อมูล 
