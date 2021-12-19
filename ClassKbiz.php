@@ -73,7 +73,8 @@ class kbizbyfeweiei {
 		return json_decode($response, true);
 	}
 
-	function getTransactionHistory($startDate = null, $endDate = null) {
+	function getTransactionHistory($limit = null, $startDate = null, $endDate = null) {
+		$limit = ($startDate == null) ? 5 : $startDate;
 		$startDate = ($startDate == null) ? date("d/m/Y", strtotime('-1 day')) : $startDate;
 		$endDate = ($endDate == null) ? date("d/m/Y", time()) : $endDate;
 		$headers = array(
@@ -82,8 +83,8 @@ class kbizbyfeweiei {
 			"Authorization: ".$this->response["token"],
 			"Content-Type: application/json" ,
 		);
-		$body = '{"approveStatusList":[],"transStatus":[],"pageNumber":1,"pageAmount":5,"custType":"I","lang":"th","accountFrom":"'.$this->response["accountFrom"].'","accountFromType":"SA","ownerType":"Retail","ownerId":"'.$this->response["ibId"].'","startDate":"'.$startDate.'","endDate":"'.$endDate.'","tranType":"","accountTo":"","bankCode":""}';
-		$response = $this->curlfew("/api/transactioninquiry/getTransactionHistoryMaker", $headers, 0, $body);
+		$body = '{"acctNo":"'.$this->response["accountFrom"].'","acctType":"SA","custType":"I","ownerType":"Retail","ownerId":"'.$this->response["ibId"].'","pageNo":"1","rowPerPage":"'.$limit.'","refKey":"","startDate":"'.$startDate.'","endDate":"'.$endDate.'"}';
+		$response = $this->curlfew("/api/accountsummary/getRecentTransactionList", $headers, 0, $body);
 		return json_decode($response, true);
 	}
 
@@ -94,8 +95,28 @@ class kbizbyfeweiei {
 			"Authorization: ".$this->response["token"],
 			"Content-Type: application/json" ,
 		);
-		$body = '{"custType":"I","ownerId":"'.$this->response["ibId"].'","ownerType":"Retail","nicknameType":"OWNAC","pageAmount":6,"lang":"th","isReload":"N"}';
+		$body = '{"custType":"I","ownerId":"'.$this->response["ibId"].'","ownerType":"Retail","nicknameType":"OWNAC","pageAmount":100,"lang":"th","isReload":"N"}';
 		$response = $this->curlfew("/api/accountsummary/getAccountSummaryList", $headers, 0, $body);
 		return json_decode($response, true);
 	}
+
+	function getRecentTransactionDetail($transDate, $origRqUid, $originalSourceId, $debitCreditIndicator, $transCode, $transType) {
+		$headers = array(
+			"Connection: keep-alive",
+			"X-IB-ID: ".$this->response["ibId"],
+			"Authorization: ".$this->response["token"],
+			"Content-Type: application/json" ,
+		);
+		$body = '{"transDate":"'.$transDate.'","acctNo":"'.$this->response["accountFrom"].'","origRqUid":"'.$origRqUid.'","custType":"I","originalSourceId":"'.$originalSourceId.'","transCode":"'.$transCode.'","debitCreditIndicator":"'.$debitCreditIndicator.'","transType":"'.$transType.'","ownerType":"Retail","ownerId":"'.$this->response["ibId"].'"}';
+		$response = $this->curlfew("/api/accountsummary/getRecentTransactionDetail", $headers, 0, $body);
+		return json_decode($response, true);
+	}
+
+	function GetNumberOtherBank($res) {
+		foreach ($res["data"]["recentTransactionList"] as $i => $value) {
+			$res["data"]["recentTransactionList"][$i]["data"] = $this->getRecentTransactionDetail(explode(" ", $value["transDate"])[0], $value["origRqUid"], $value["originalSourceId"], $value["debitCreditIndicator"], $value["transCode"], $value["transType"]);
+		}
+		return $res;
+	}
+
 }
