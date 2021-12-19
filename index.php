@@ -15,9 +15,10 @@
     // print_r($result);
 
     // Step2
-    // $res = $kbank->refreshSession();
-    // $res = $kbank->getTransactionHistory(); //โชว์ประวัติการทำรายการต่างๆบลาๆ
-    // $res = $kbank->getAccountSummaryList(); //โชว์ข้อมูลผู้ใช้ เช่น เลขบัญชี หรือ จำนวนเงินในบัญชี
+    // $refresh = $kbank->refreshSession();
+    // $AccountSummaryList = $kbank->getAccountSummaryList(); //โชว์ข้อมูลผู้ใช้ เช่น เลขบัญชี หรือ จำนวนเงินในบัญชี
+    // $res = $kbank->getTransactionHistory(); //โชว์ผลประวัติการโอนเงินต่างๆ
+    // $res = $kbank->GetNumberOtherBank($res); //ถ้าต้องการให้แสดงเลขบัญชีครบทุกหลัก ให้ใส่ฟังชั่นนี้ตามหลัง
     // print_r($res);
 
 ?>
