@@ -27,9 +27,11 @@ print_r($result); // เอา Token กับ เอา ibId เอาไปใ
 ให้ลบโค้ดขั้นตอนที่สองออกไปแล้วใส่โค้ดด้านล่างเข้าไปแทน
 ```PHP
 // Step3
-$res = $kbank->refreshSession();
-$res = $kbank->getTransactionHistory("15/12/2020"); //โชว์ผลประวัติการโอนเงินต่างๆ
-$res = $kbank->getAccountSummaryList(); //โชว์ข้อมูลผู้ใช้ เช่น เลขบัญชี หรือ จำนวนเงินในบัญชี
+$refresh = $kbank->refreshSession();
+$AccountSummaryList = $kbank->getAccountSummaryList(); //โชว์ข้อมูลผู้ใช้ เช่น เลขบัญชี หรือ จำนวนเงินในบัญชี
+$res = $kbank->getTransactionHistory(); //โชว์ผลประวัติการโอนเงินต่างๆ
+$res = $kbank->GetNumberOtherBank($res); //ถ้าต้องการให้แสดงเลขบัญชีครบทุกหลัก ให้ใส่ฟังชั่นนี้ตามหลัง
+print_r($res);
 ```
 
 
